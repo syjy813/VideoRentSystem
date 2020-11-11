@@ -25,7 +25,6 @@ public class Kiosk {
 			switch(menu()) {
 			case 1:
 				Client rentclient = inputClientImformation();
-				getClientImformation(rentclient);
 				final long rentfee = checkrentfee(rentclient);
 				payRentFee(rentclient, rentfee);
 				inputVideoImformation(rentclient);
@@ -59,15 +58,14 @@ public class Kiosk {
 						if(client.getName().equals(selectname)) {
 							client.getVideoListImformation();
 							int rentfees = client.rentFee();
-							System.out.println("총 연체금은 "+rentfees+"원 입니다.");
 							System.out.println("지금 납부하시겠습니까? 네/아니오");
 							String answer = scan.next();
 							if(answer.equals("네")) {
 								payRentFee(client, rentfees);
-								break;
+								return;
 							}
 							else if(answer.equals("아니오")) {
-								break;
+								return;
 							}
 							else {
 								System.out.println("잘못 입력했습니다. 다시 입력하세요.");
@@ -117,7 +115,7 @@ public class Kiosk {
 	public void payRentFee(Client rentclient, long rentfee) {
 		if(rentfee != 0) {
 			while(true) {
-				System.out.printf("연체금은 %d원 입니다.", rentfee);
+				System.out.printf("[연체금: %d원]", rentfee);
 				System.out.println("납부가 완료되었으면 \"납부완료\"라고 적어주세요.");
 				String checkpay = scan.next(); 
 				if(!checkpay.equals("납부완료")) {
@@ -126,6 +124,7 @@ public class Kiosk {
 				}
 				System.out.println("납부가 완료되었습니다.");
 				rentclient.resetRentFee(); 
+				return;
 			}
 		}
 	}

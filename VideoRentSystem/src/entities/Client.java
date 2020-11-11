@@ -53,7 +53,7 @@ public void getVideoListImformation() {
 	}
 	for(Video video : videolist) {
 		System.out.println(video);
-		System.out.println("총 연체금은 "+rentFee()+"원 입니다.");
+		System.out.println("총 연체금은 "+rentFee()+"원입니다.");
 	}
 }
 
