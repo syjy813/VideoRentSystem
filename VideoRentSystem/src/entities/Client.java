@@ -7,17 +7,19 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Client {
 
    final String name;
-   final List<Video> videolist;
+   final Set<Video> videolist;
    final LocalDate today;
 
    public Client(String name) {
       this.name = name;
-      videolist = new ArrayList<>();
+      videolist = new HashSet<>();
       today = LocalDate.now();
    }
 
@@ -27,20 +29,17 @@ public class Client {
 
    public int rentFee() {
       int sum = 0;
-      int rentdays;
+      int rentfees = 0;
       if(!videolist.isEmpty()) {
          for(Video video:videolist) {
-        	 rentdays = Period.between(video.getRentday(), today).getDays();
-        	 if(rentdays > 2) {
-        		 sum += (rentdays-2); 
-        	 }
+            rentfees += video.getrentfee(); 
+            }
          }
-      }
-      return sum;
+      return rentfees;
    }
    
-   public List<Video> getVideoList() {
-	   return videolist;
+   public Set<Video> getVideoList() {
+      return videolist;
    }
    @Override
    public String toString() {
