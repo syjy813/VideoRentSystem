@@ -43,7 +43,28 @@ public class Client {
    }
    @Override
    public String toString() {
-      return "Client [name=" + name + ", today=" + today + "]";
+      return "[이름=" + name + ", 오늘 날짜=" + today + ", 빌린 비디오 개수: "+videolist.size()+"]";
    }
+
+public void getVideoListImformation() {
+	if(videolist.isEmpty() == true) {
+		System.out.println("현재 빌린 비디오가 없습니다.");
+		return;
+	}
+	for(Video video : videolist) {
+		System.out.println(video);
+		System.out.println("총 연체금은 "+rentFee()+"원 입니다.");
+	}
+}
+
+public void resetRentFee() {
+	for(Video video : videolist) {
+		if(video.getRentdays() > 2) {
+			videolist.remove(video);
+		}
+	}
+	
+	
+}
 
 }

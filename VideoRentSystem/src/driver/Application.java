@@ -17,8 +17,6 @@ public class Application {
 		System.out.println(rentfee);*/
 		Kiosk system = new Kiosk();
 		system.run();
-		LocalDate date2 = LocalDate.now().minus(Period.ofDays(2));
-		System.out.println(date2);
 	}
 
 }
