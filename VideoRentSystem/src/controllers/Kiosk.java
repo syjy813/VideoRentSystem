@@ -8,15 +8,21 @@ import entities.Video;
 import repositories.InMemoryClientRepository;
 
 public class Kiosk {
+	
+	//멤버필드 구성
 	Scanner scan = new Scanner(System.in);
 	InMemoryClientRepository ClientList;
 	final List<Client> clients;
 
+	
+	//생성자 초기화
 	public Kiosk() {
 		ClientList = new InMemoryClientRepository();
 		clients = ClientList.getClientListByName();
 	}
 
+	
+	//작동 메소드
 	public void run() {
 		//0.접속 안내 창을 띄워줍니다.
 		renderWelcomMessage();
@@ -42,6 +48,7 @@ public class Kiosk {
 		}
 	}
 
+	//회원 조회 메소드
 	private void selectClientImformation() {
 		for(Client client:clients) {
 			System.out.println(client);
@@ -84,15 +91,19 @@ public class Kiosk {
 		}
 	}
 
+	
+	//정보 얻어오는 메소드
 	private void getClientImformation(Client rentclient) {
 		System.out.println(rentclient);
 		rentclient.getVideoListImformation();
 	}
 
+	//시스템 접속 안내문 메소드
 	private void renderWelcomMessage() {
 		System.out.println("비디오 대여 시스템에 접속하셨습니다.");
 	}
 
+	//멤버 입력 메소드
 	public Client inputClientImformation() {
 		System.out.println("이름을 입력하세요.");
 		String name = scan.next();
@@ -108,10 +119,12 @@ public class Kiosk {
 		return new Client(name);
 	}
 
+	//연체금 확인 메소드
 	public long checkrentfee (Client rentclient) {
 		return rentclient.rentFee();
 	}
 
+	//연체금 납부 메소드
 	public void payRentFee(Client rentclient, long rentfee) {
 		if(rentfee != 0) {
 			while(true) {
@@ -128,11 +141,14 @@ public class Kiosk {
 			}
 		}
 	}
+	
+	//비디오 정보 입력 메소드
 	public void inputVideoImformation(Client rentclient) {
 		ClientList.setVideoData(rentclient);
 		System.out.println("입력되었습니다.");
 	}
 
+	//메뉴 메소드
 	public int menu() {
 		System.out.println("메뉴 \n1. 입력 \n2. 회원 정보 조회 \n3. 종료");
 		int selectmenu = scan.nextInt();
